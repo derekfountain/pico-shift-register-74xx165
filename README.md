@@ -97,8 +97,8 @@ output will be something like
 
 I have the top 2 data lines tied to 3V3, the rest tied to GND.
 
-The code pulses the "parallel load" line, sometimes know at the "latch",
-with this:
+The code pulses the "parallel load" line, sometimes known as the
+"latch", with this:
 
 
 ```
@@ -124,9 +124,6 @@ This collects the data bit from the Q pin's GPIO, then toggles the
 clock line high then low. Toggling the clock line causes the shift
 register to put the next of the data bits on the Q pin, so loop round,
 fetch that data bit, and do it again 8 times in total.
-
-If this works you can move on to the PIO version which is where the
-good stuff is.
 
 ## The PIO Code
 
