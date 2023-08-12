@@ -17,7 +17,7 @@ you want the data, you grab the state of all those GPIOs in one atomic
 operation. That's fine if you have the GPIOs free. If you're short on
 GPIOs you can't really use this approach. In this case you can use a
 shift register, which will allow you to capture the state of the 8
-data lines using only 2 GPIOs.
+data lines using only 2 (maybe 3) GPIOs.
 
 With the shift register solution you connect the 8 data lines to the
 chip's 8 inputs, then when you want the data bus status you pulse
@@ -25,6 +25,10 @@ another input pin on the shift register. The shift register will then
 immediately "latch" the state of all 8 data lines. You then retrieve
 the 8 data bits by reading them serially, one at a time using a
 timing clock pulse, from the shift register's single output pin.
+
+The advantage is that you save several GPIOs. The disadvantage is that
+it takes an appreciable amount of time to read the bits out one by
+one.
 
 ## Aim of my project
 
@@ -60,6 +64,12 @@ I've got the 74LV165's clock line (called CP or CLK) connected to Pico
 GPIO13, the 74LV165's parallel load line (called PL or SH/LD)
 connected to Pico GPIO14, and the 74LV165's output (which is an input
 to the Pico) (called Q) connected to the Pico's GPIO10.
+
+Ignore the wires soldered across the Pico in this photo:
+
+![alt text](images/setup.jpg "Set up")
+
+It's an old one which has been used for all sorts of stuff. :)
 
 ## The C Code
 
